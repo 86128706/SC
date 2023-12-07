@@ -1,5 +1,6 @@
 package com.example.sc;
 
+import com.example.service.LoginBackEnd;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -8,7 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import service.LoginBackEnd;
+
+import java.sql.SQLException;
 
 public class HomePage {
     public static Stage first(){
@@ -38,14 +40,17 @@ public class HomePage {
 
             //判断学号能否登录(未完成)
             //将获得的学号传递到LoginBackEnd
-            if (LoginBackEnd.login(name)==1) {
-                //展示成功界面
-                ChooseFirst.cf().show();
-            } else if (LoginBackEnd.login(name)==0) {
-                //展示登录失败界面
-                ChooseFirst.df().show();
+            try {
+                if (LoginBackEnd.login(name)) {
+                    //展示成功界面
+                    ChooseFirst.cf().show();
+                } else if (!LoginBackEnd.login(name)) {
+                    //展示登录失败界面
+                    ChooseFirst.df().show();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-
 
 
         });
@@ -59,6 +64,6 @@ public class HomePage {
         stage.setScene(scene);
         stage.setMinWidth(400);
         stage.setMinHeight(250);
-       return  stage;
+        return stage;
     }
 }

@@ -1,25 +1,33 @@
 package com.example.sc;
 
+import com.example.util.TopicTransfer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
 public class ChoosePage {
-    public static Stage examination(int number){
+    public static Stage examination(int number) throws SQLException {
         Stage stage=new Stage();
         VBox vBox = new VBox();
         vBox.setSpacing(20);
 
+        TopicTransfer topicTransfer = new TopicTransfer();
+
         //第一行题目
-        Label label1=new Label("(变量，题目序号)+（数据库题目）");
+        Label label1=new Label(topicTransfer.getSitumon());
         //第二行四个选项
         ToggleGroup toggleGroup = new ToggleGroup();
-        RadioButton t1=new RadioButton("A:"+"数据库选项");//如何读取数据库内容
-        RadioButton t2=new RadioButton("B:"+"数据库选项");
-        RadioButton t3=new RadioButton("C:"+"数据库选项");
-        RadioButton t4=new RadioButton("D:"+"数据库选项");
+        RadioButton t1=new RadioButton("A:"+topicTransfer.getOptionsA());//如何读取数据库内容
+        RadioButton t2=new RadioButton("B:"+topicTransfer.getOptionsB());
+        RadioButton t3=new RadioButton("C:"+topicTransfer.getOptionsC());
+        RadioButton t4=new RadioButton("D:"+topicTransfer.getOptionsD());
         t1.setToggleGroup(toggleGroup);
         t2.setToggleGroup(toggleGroup);
         t3.setToggleGroup(toggleGroup);

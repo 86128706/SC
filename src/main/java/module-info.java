@@ -6,8 +6,8 @@ module com.example.sc {
 
     opens com.example.sc to javafx.fxml;
     exports com.example.sc;
-    exports util;
-    opens util to javafx.fxml;
-    exports service;
-    opens  service to javafx.fxml;
+    exports com.example.util;
+    opens com.example.util to javafx.fxml;
+    exports com.example.service;
+    opens com.example.service to javafx.fxml;
 }

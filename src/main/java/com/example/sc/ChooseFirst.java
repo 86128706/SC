@@ -8,6 +8,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.sql.SQLException;
+
 //登录成功界面
 public class ChooseFirst {
 
@@ -34,7 +37,12 @@ public class ChooseFirst {
             String text = textField1.getText();
             int number = Integer.parseInt(text);
             //展示题目界面 传递题量数据
-            ChoosePage.examination(number).show();
+            try {
+                ChoosePage.examination(number).show();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
         });
         //放入VBOX
         vBox.getChildren().addAll(hBox,button1);
