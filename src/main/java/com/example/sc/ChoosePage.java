@@ -11,17 +11,29 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.util.HashSet;
 
+@SuppressWarnings(value = {"unused"})
 public class ChoosePage {
     public static Stage examination(int number) throws SQLException {
         Stage stage=new Stage();
         VBox vBox = new VBox();
         vBox.setSpacing(20);
 
+        HashSet<Integer> hashSet = new HashSet<>();
+        do {
+            int ran = (int) (Math.random() * 100);
+            if (ran != 0) {
+                hashSet.add(ran);
+            }
+        } while (hashSet.size() != number);
+
         TopicTransfer topicTransfer = new TopicTransfer();
 
         //第一行题目
         Label label1=new Label(topicTransfer.getSitumon());
+        label1.setMaxWidth(380); // 设置最大宽度
+        label1.setWrapText(true);//限制换行
         //第二行四个选项
         ToggleGroup toggleGroup = new ToggleGroup();
         RadioButton t1=new RadioButton("A:"+topicTransfer.getOptionsA());//如何读取数据库内容
