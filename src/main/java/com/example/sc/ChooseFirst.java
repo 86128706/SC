@@ -22,7 +22,7 @@ public class ChooseFirst {
         VBox vBox = new VBox();
         vBox.setSpacing(20);
         ImageView view=new ImageView();
-        Image image=new Image("C:\\Users\\26077\\IdeaProjects\\SC\\src\\main\\resources\\Image\\1.jpg");
+        Image image=new Image("D:\\JavaSE\\SC\\src\\main\\resources\\Image\\1.jpg");
         view.setImage(image);
 
         //垂直框架 第二行 水平面板

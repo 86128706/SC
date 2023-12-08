@@ -1,6 +1,5 @@
 package com.example.sc;
 
-import javafx.event.Event;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -25,7 +24,7 @@ public class AdministratorPage {
         HBox hBox7=new HBox();
 
         ImageView view=new ImageView();
-        Image image=new Image("C:\\Users\\26077\\IdeaProjects\\SC\\src\\main\\resources\\Image\\4.jpg");
+        Image image=new Image("D:\\JavaSE\\SC\\src\\main\\resources\\Image\\4.jpg");
         view.setImage(image);
 
         TextField timu=new TextField();
