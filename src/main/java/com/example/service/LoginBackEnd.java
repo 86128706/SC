@@ -7,15 +7,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+@SuppressWarnings(value = {"all"})
 public class LoginBackEnd {
     public static boolean login(String name) throws SQLException {
-        if (name == null || name.trim().equals("")) {
+        if (name == null || name.trim().isEmpty()) {
             return false;
         }
         //链接数据库
         Connection connection= JdbcUtil.getConnection();
         //数据库查询表
-        String sql= "select account from single";
+        String sql= "select account from student";
         Statement statement=connection.createStatement();
         ResultSet rs=statement.executeQuery(sql);
         while (rs.next()){
