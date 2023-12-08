@@ -1,7 +1,6 @@
 package com.example.sc;
 
 import com.example.service.LoginBackEnd;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -51,17 +50,17 @@ public class HomePage {
 
             //判断学号能否登录(未完成)
             //将获得的学号传递到LoginBackEnd
-//            try {
-//                if (LoginBackEnd.login(name)) {
-//                    //展示成功界面
-//                    ChooseFirst.cf().show();
-//                } else if (!LoginBackEnd.login(name)) {
-//                    //展示登录失败界面
-//                    ChooseFirst.df().show();
-//                }
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
+            try {
+                if (LoginBackEnd.login(name)) {
+                    //展示成功界面
+                    ChooseFirst.cf().show();
+                } else if (!LoginBackEnd.login(name)) {
+                    //展示登录失败界面
+                    ChooseFirst.df().show();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             ChooseFirst.cf().show();
         });
 
@@ -71,7 +70,7 @@ public class HomePage {
 
         //背景
         ImageView view=new ImageView();
-        Image image=new Image("C:\\Users\\26077\\IdeaProjects\\SC\\src\\main\\resources\\Image\\1.jpg");
+        Image image=new Image("D:\\JavaSE\\SC\\src\\main\\resources\\Image\\1.jpg");
         view.setImage(image);
         //全部放入VBOX
         vBox.getChildren().addAll(label1,hBox,hBox1);

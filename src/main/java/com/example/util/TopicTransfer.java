@@ -33,22 +33,24 @@ public class TopicTransfer {
 
 
     Connection connection= JdbcUtil.getConnection();
-    String sqlF="select * from topic where id = ?";
+    String sqlF="select * from topic where id = ?;";
     PreparedStatement preparedStatement= connection.prepareStatement(sqlF);
     ResultSet resultSet;
 
 
-    public TopicTransfer() throws SQLException {
-
+    public TopicTransfer(int index) throws SQLException {
+        find(index);
     }
     public void find(int index) throws SQLException {
         preparedStatement.setInt(1, index);
         resultSet= preparedStatement.executeQuery();
-        setSitumon(resultSet.getString("topic"));
-        setOptionsA(resultSet.getString("bA"));
-        setOptionsB(resultSet.getString("bB"));
-        setOptionsC(resultSet.getString("bC"));
-        setOptionsD(resultSet.getString("bD"));
+        while (resultSet.next()){
+            setSitumon(resultSet.getString("topic"));
+            setOptionsA(resultSet.getString("bA"));
+            setOptionsB(resultSet.getString("bB"));
+            setOptionsC(resultSet.getString("bC"));
+            setOptionsD(resultSet.getString("bD"));
+        }
         preparedStatement.clearParameters();
     }
 }
