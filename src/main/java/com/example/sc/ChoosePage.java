@@ -19,15 +19,14 @@ import java.util.Iterator;
 
 
 public class ChoosePage {
+    private static final double STAGE_MIN_WIDTH = 650;  // 舞台最小宽度
+    private static final double STAGE_MIN_HEIGHT = 450; // 舞台最小高度
     static int flag=0;
     public static Stage examination(int number) throws SQLException {
         int i=0;
         Stage stage=new Stage();
         VBox vBox = new VBox();
         vBox.setSpacing(20);
-        ImageView view=new ImageView();
-        Image image=new Image("C:\\Users\\26077\\IdeaProjects\\SC\\src\\main\\resources\\Image\\1.jpg");
-        view.setImage(image);
         HashSet<Integer> hashSet = new HashSet<>();
         do {
             int ran = (int) (Math.random() * 10);
@@ -87,6 +86,20 @@ public class ChoosePage {
         vBox.setLayoutX(210);
         vBox.setLayoutY(100);
         vBox.setSpacing(20);
+
+        //背景图片设置
+        ImageView view=new ImageView();
+        Image image=new Image("C:\\Users\\26077\\IdeaProjects\\SC\\src\\main\\resources\\Image\\5.jpg");
+        view.setImage(image);
+        // 计算适应舞台的宽度和高度
+        double fitWidth = Math.min(image.getWidth(),STAGE_MIN_WIDTH);
+        double fitHeight = Math.min(image.getHeight(), STAGE_MIN_HEIGHT);
+        // 设置ImageView的适应舞台的宽度和高度
+        view.setFitWidth(fitWidth);
+        view.setFitHeight(fitHeight);
+
+        //舞台设置
+        stage.setTitle("考试端");
         AnchorPane pane=new AnchorPane();
         pane.getChildren().addAll(view,vBox);
         Scene scene=new Scene(pane,650,450);

@@ -13,6 +13,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class AdministratorPage {
+    private static final double STAGE_MIN_WIDTH = 650;  // 舞台最小宽度
+    private static final double STAGE_MIN_HEIGHT = 450; // 舞台最小高度
     public static Stage cf(){
         Stage stage=new Stage();
         VBox hBox=new VBox();
@@ -25,7 +27,7 @@ public class AdministratorPage {
         HBox hBox7=new HBox();
 
         ImageView view=new ImageView();
-        Image image=new Image("C:\\Users\\26077\\IdeaProjects\\SC\\src\\main\\resources\\Image\\4.jpg");
+        Image image=new Image("C:\\Users\\26077\\IdeaProjects\\SC\\src\\main\\resources\\Image\\1.jpg");
         view.setImage(image);
 
         TextField timu=new TextField();
@@ -103,6 +105,17 @@ public class AdministratorPage {
         hBox.setSpacing(20);
         AnchorPane pane=new AnchorPane();
         pane.getChildren().addAll(view,hBox);
+
+        //背景图片设置
+        // 计算适应舞台的宽度和高度
+        double fitWidth = Math.min(image.getWidth(),STAGE_MIN_WIDTH);
+        double fitHeight = Math.min(image.getHeight(), STAGE_MIN_HEIGHT);
+        // 设置ImageView的适应舞台的宽度和高度
+        view.setFitWidth(fitWidth);
+        view.setFitHeight(fitHeight);
+
+        //舞台设置
+        stage.setTitle("试题添加");
         Scene scene=new Scene(pane,650,450);
         stage.setScene(scene);
         stage.setMinWidth(650);
