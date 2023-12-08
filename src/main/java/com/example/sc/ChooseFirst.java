@@ -5,6 +5,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -18,7 +21,9 @@ public class ChooseFirst {
         Stage stage=new Stage();
         VBox vBox = new VBox();
         vBox.setSpacing(20);
-
+        ImageView view=new ImageView();
+        Image image=new Image("C:\\Users\\26077\\IdeaProjects\\SC\\src\\main\\resources\\Image\\1.jpg");
+        view.setImage(image);
 
         //垂直框架 第二行 水平面板
         HBox hBox=new HBox();
@@ -45,11 +50,17 @@ public class ChooseFirst {
             }
 
         });
+
+        vBox.setLayoutX(210);
+        vBox.setLayoutY(150);
+
         //放入VBOX
         vBox.getChildren().addAll(hBox,button1);
         hBox.setAlignment(Pos.CENTER);
         vBox.setAlignment(Pos.CENTER);
-        Scene scene=new Scene(vBox);
+        AnchorPane pane=new AnchorPane();
+        pane.getChildren().addAll(view,vBox);
+        Scene scene=new Scene(pane,650,450);
         stage.setScene(scene);
         stage.setMinWidth(400);
         stage.setMinHeight(250);

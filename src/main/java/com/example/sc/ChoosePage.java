@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -20,7 +23,9 @@ public class ChoosePage {
         Stage stage=new Stage();
         VBox vBox = new VBox();
         vBox.setSpacing(20);
-
+        ImageView view=new ImageView();
+        Image image=new Image("C:\\Users\\26077\\IdeaProjects\\SC\\src\\main\\resources\\Image\\1.jpg");
+        view.setImage(image);
         HashSet<Integer> hashSet = new HashSet<>();
         do {
             int ran = (int) (Math.random() * 10);
@@ -74,7 +79,12 @@ public class ChoosePage {
         //放入VBOX
         vBox.getChildren().addAll(label1,t1,t2,t3,t4,button1);
         vBox.setAlignment(Pos.CENTER);
-        Scene scene=new Scene(vBox);
+        vBox.setLayoutX(210);
+        vBox.setLayoutY(100);
+        vBox.setSpacing(20);
+        AnchorPane pane=new AnchorPane();
+        pane.getChildren().addAll(view,vBox);
+        Scene scene=new Scene(pane,650,450);
         stage.setScene(scene);
         stage.setMinWidth(650);
         stage.setMinHeight(450);
