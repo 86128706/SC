@@ -33,6 +33,7 @@ public class ChooseFirst {
 
         //鼠标事件，跳转至题目界面
         button1.setOnAction(actionEvent -> {
+            stage.close();
             //获取题量数据
             String text = textField1.getText();
             int number = Integer.parseInt(text);
@@ -63,6 +64,8 @@ public class ChooseFirst {
         VBox vBox = new VBox();
         Label label2 = new Label("登录失败");
         Button button1 = new Button("确定");
+        stage.setMinWidth(650);
+        stage.setMinHeight(450);
         stage.setResizable(false);//用户不可改变窗口大小
         //缺少确定的点击结果
         return stage;
