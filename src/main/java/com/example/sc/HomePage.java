@@ -65,6 +65,7 @@ public class HomePage {
         });
 
         button2.setOnAction(actionEvent -> {
+            stage.close();
             AdministratorPage.cf().show();
         });
 
@@ -74,8 +75,11 @@ public class HomePage {
         view.setImage(image);
         //全部放入VBOX
         vBox.getChildren().addAll(label1,hBox,hBox1);
+
+        //定位
         vBox.setLayoutX(210);
         vBox.setLayoutY(150);
+
         vBox.setSpacing(30);
         hBox.setSpacing(20);
         hBox1.setSpacing(20);
