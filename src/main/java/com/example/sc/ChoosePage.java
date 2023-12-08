@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.Iterator;
+
 
 public class ChoosePage {
     static int flag=0;
@@ -34,7 +36,9 @@ public class ChoosePage {
             }
         } while (hashSet.size() != number);
 
-        TopicTransfer topicTransfer = new TopicTransfer();
+        Iterator<Integer> iterator = hashSet.iterator();
+
+        TopicTransfer topicTransfer = new TopicTransfer(iterator.next());
 
         //第一行题目
         Label label1=new Label(topicTransfer.getSitumon());
@@ -60,18 +64,19 @@ public class ChoosePage {
         //根据题目量设置每题分数
         button1.setOnAction(actionEvent -> {
 
-          vBox.getChildren().clear();
-          vBox.getChildren().addAll(label1,t1,t2,t3,button1);
             try {
-                topicTransfer.find(5);
+                topicTransfer.find(iterator.next());
+                label1.setText(topicTransfer.getSitumon());
+                t1.setText("A:"+topicTransfer.getOptionsA());
+                t2.setText("B:"+topicTransfer.getOptionsB());
+                t3.setText("C:"+topicTransfer.getOptionsC());
+                t4.setText("D:"+topicTransfer.getOptionsD());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-            label1.setText(topicTransfer.getSitumon());
-            t1.setText("A:"+topicTransfer.getOptionsA());
-            t2.setText("B:"+topicTransfer.getOptionsB());
-            t3.setText("C:"+topicTransfer.getOptionsC());
-            t4.setText("D:"+topicTransfer.getOptionsD());
+            if (t1.isSelected()){
+                System.out.println("1");
+            }
 
         });
 
