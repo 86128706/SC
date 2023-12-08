@@ -83,9 +83,3 @@ public class ChooseFirst {
 
     }
 }
-
-
-//    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                        alert.setTitle("提示");
-//                                alert.setHeaderText("账号不存在");
-//                                alert.showAndWait();
