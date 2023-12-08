@@ -2,6 +2,7 @@ module com.example.sc {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires lombok;
 
 
     opens com.example.sc to javafx.fxml;

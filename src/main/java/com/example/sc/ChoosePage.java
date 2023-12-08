@@ -15,14 +15,16 @@ import java.util.HashSet;
 
 @SuppressWarnings(value = {"unused"})
 public class ChoosePage {
+    static int flag=0;
     public static Stage examination(int number) throws SQLException {
+
         Stage stage=new Stage();
         VBox vBox = new VBox();
         vBox.setSpacing(20);
 
         HashSet<Integer> hashSet = new HashSet<>();
         do {
-            int ran = (int) (Math.random() * 100);
+            int ran = (int) (Math.random() * 10);
             if (ran != 0) {
                 hashSet.add(ran);
             }
@@ -52,9 +54,23 @@ public class ChoosePage {
         //设置单题分数individual
         double individual= (double) 100 /number;
         //根据题目量设置每题分数
+
+
         button1.setOnAction(actionEvent -> {
-          //  未写
+            try {
+                topicTransfer.find(5);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            label1.setText(topicTransfer.getSitumon());
+            t1.setText("A:"+topicTransfer.getOptionsA());
+            t2.setText("B:"+topicTransfer.getOptionsB());
+            t3.setText("C:"+topicTransfer.getOptionsC());
+            t4.setText("D:"+topicTransfer.getOptionsD());
+
         });
+
+
 
 
         //放入VBOX
