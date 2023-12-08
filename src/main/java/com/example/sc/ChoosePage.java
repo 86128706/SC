@@ -13,11 +13,20 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 
 public class ChoosePage {
+    static int flag=0;
     public static Stage examination(int number) throws SQLException {
         int i=0;
         Stage stage=new Stage();
         VBox vBox = new VBox();
         vBox.setSpacing(20);
+
+        HashSet<Integer> hashSet = new HashSet<>();
+        do {
+            int ran = (int) (Math.random() * 10);
+            if (ran != 0) {
+                hashSet.add(ran);
+            }
+        } while (hashSet.size() != number);
 
         TopicTransfer topicTransfer = new TopicTransfer();
 
@@ -47,6 +56,17 @@ public class ChoosePage {
 
           vBox.getChildren().clear();
           vBox.getChildren().addAll(label1,t1,t2,t3,button1);
+            try {
+                topicTransfer.find(5);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            label1.setText(topicTransfer.getSitumon());
+            t1.setText("A:"+topicTransfer.getOptionsA());
+            t2.setText("B:"+topicTransfer.getOptionsB());
+            t3.setText("C:"+topicTransfer.getOptionsC());
+            t4.setText("D:"+topicTransfer.getOptionsD());
+
         });
 
 
