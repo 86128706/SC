@@ -31,11 +31,12 @@ public class ChooseFirst {
         HBox hBox = new HBox();
         hBox.setSpacing(20);//容器内组件间距
         //第二行 水平面板内容
-        Label label2 = new Label("题量选择");
+        Label label2 = new Label("题量设置");
         TextField textField1 = new TextField();
         hBox.getChildren().addAll(label2, textField1);
         //第三行 登录按钮
         Button button1 = new Button("确定");
+        button1.setStyle("-fx-background-color: #07bafb;-fx-font-size:16;-fx-text-fill: white ");
 
 
         //鼠标事件，跳转至题目界面
