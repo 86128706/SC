@@ -22,6 +22,7 @@ public class ChoosePage {
     private static final double STAGE_MIN_WIDTH = 650;  // 舞台最小宽度
     private static final double STAGE_MIN_HEIGHT = 450; // 舞台最小高度
     static int flag=1;
+    static int sun=1;
     static double sum=0;
     public static Stage examination(int number) throws SQLException {
         int i=0;
@@ -41,7 +42,7 @@ public class ChoosePage {
         TopicTransfer topicTransfer = new TopicTransfer(iterator.next(),number);
 
         //第一行题目
-        Label label1=new Label("题目 "+flag+"  "+topicTransfer.getSitumon());
+        Label label1=new Label("题目 "+sun+"  "+topicTransfer.getSitumon());
         label1.setMaxWidth(630); // 设置最大宽度
         label1.setWrapText(true);//限制换行
         //第二行四个选项
@@ -64,6 +65,7 @@ public class ChoosePage {
         button1.setOnAction(actionEvent -> {
             if (flag<number){
                 flag++;
+                sun++;
                 if (t1.isSelected()){
                     sum+=topicTransfer.r("A");
                 }else if (t2.isSelected()){
@@ -75,7 +77,7 @@ public class ChoosePage {
                 }
                 try {
                     topicTransfer.find(iterator.next());
-                    label1.setText("题目 "+flag+"  "+topicTransfer.getSitumon());
+                    label1.setText("题目 "+sun+"  "+topicTransfer.getSitumon());
                     t1.setText("A:"+topicTransfer.getOptionsA());
                     t2.setText("B:"+topicTransfer.getOptionsB());
                     t3.setText("C:"+topicTransfer.getOptionsC());
@@ -86,19 +88,22 @@ public class ChoosePage {
             }
             else if (flag==number){
                 //结束界面
-                Lastpage.first().show();
-//                if (t1.isSelected()){
-//                    sum+=topicTransfer.r("A");
-//                }else if (t2.isSelected()){
-//                    sum+=topicTransfer.r("B");
-//                }else if (t3.isSelected()){
-//                    sum+=topicTransfer.r("B");
-//                }else if (t4.isSelected()){
-//                    sum+=topicTransfer.r("D");
-//                }
-//                flag=999999;
-            }
 
+                if (t1.isSelected()){
+                    sum+=topicTransfer.r("A");
+                }else if (t2.isSelected()){
+                    sum+=topicTransfer.r("B");
+                }else if (t3.isSelected()){
+                    sum+=topicTransfer.r("B");
+                }else if (t4.isSelected()){
+                    sum+=topicTransfer.r("D");
+                }
+                flag=1;
+                sun=1;
+                int roundedNumber = (int) Math.round(sum);
+                Lastpage.first(roundedNumber).show();
+                stage.close();
+            }
         });
 
 

@@ -20,7 +20,7 @@ import java.sql.SQLException;
 public class Lastpage {
     private static final double STAGE_MIN_WIDTH = 650;  // 舞台最小宽度
     private static final double STAGE_MIN_HEIGHT = 450; // 舞台最小高度
-    public static Stage first(){
+    public static Stage first(int sum){
         Stage stage=new Stage();
         VBox vBox = new VBox();
         vBox.setSpacing(50);
@@ -35,7 +35,8 @@ public class Lastpage {
         Label label2=new Label("您的成绩是");
         label2.setFont(new Font("Arial",20));
         //显示分数
-        Label fraction=new Label("读取分数");
+
+        Label fraction=new Label(String.valueOf(sum));
         hBox.getChildren().addAll(label2,fraction);
         //第三行 登录按钮
         Button button1=new Button("退出");
@@ -45,7 +46,6 @@ public class Lastpage {
         //退出该界面
         button1.setOnAction(actionEvent -> {
             stage.close();
-            HomePage.first().show();
         });
         //全部放入VBOX
         vBox.getChildren().addAll(label1,hBox,button1);

@@ -1,7 +1,6 @@
 package com.example.sc;
 
 import com.example.service.TopicBackEnd;
-import javafx.event.Event;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -65,7 +64,6 @@ public class AdministratorPage {
         vBox4.getChildren().addAll(label4,C);
         Label label5= new Label("D");
         vBox5.getChildren().addAll(label5,D);
-        Label label6= new Label("");
         vBox6.getChildren().addAll(BC,QQ);
         vBox6.setSpacing(30);
 
@@ -108,7 +106,7 @@ public class AdministratorPage {
             String AnserB=B.getText();
             String AnserC=C.getText();
             String AnserD=D.getText();
-            RadioButton rightanser = (RadioButton) toggleGroup.getSelectedToggle();
+//            RadioButton rightanser = (RadioButton) toggleGroup.getSelectedToggle();
 
             //  获得的保存数据 弹出保存完成
 
