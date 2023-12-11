@@ -46,6 +46,7 @@ public class Lastpage {
         //退出该界面
         button1.setOnAction(actionEvent -> {
             stage.close();
+            HomePage.first().show();
         });
         //全部放入VBOX
         vBox.getChildren().addAll(label1,hBox,button1);

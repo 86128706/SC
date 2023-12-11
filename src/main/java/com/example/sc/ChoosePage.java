@@ -101,6 +101,7 @@ public class ChoosePage {
                 flag=1;
                 sun=1;
                 int roundedNumber = (int) Math.round(sum);
+                sum=0;
                 Lastpage.first(roundedNumber).show();
                 stage.close();
             }
