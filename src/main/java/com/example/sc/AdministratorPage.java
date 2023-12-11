@@ -1,5 +1,6 @@
 package com.example.sc;
 
+import com.example.service.TopicBackEnd;
 import javafx.event.Event;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -37,6 +38,7 @@ public class AdministratorPage {
         TextField D=new TextField();
         timu.setPrefWidth(280);
 
+
         Label label1=new Label("试题添加");
         label1.setFont(new Font("Arial",28));
 
@@ -47,8 +49,9 @@ public class AdministratorPage {
         D.setPromptText("请输入D选项");
 
         Button BC=new Button("保存");
-        Button XYG=new Button("下一个");
+        BC.setStyle("-fx-background-color: #07bafb;-fx-font-size:16;-fx-text-fill: white ");
         Button QQ=new Button("退出");
+        QQ.setStyle("-fx-background-color: #07bafb;-fx-font-size:16;-fx-text-fill: white ");
 
         Label label0= new Label("请输入题目");
         vBox1.getChildren().addAll(label0,timu);
@@ -61,7 +64,7 @@ public class AdministratorPage {
         Label label5= new Label("D");
         vBox5.getChildren().addAll(label5,D);
         Label label6= new Label("");
-        vBox6.getChildren().addAll(BC,XYG,QQ);
+        vBox6.getChildren().addAll(BC,QQ);
         vBox6.setSpacing(30);
 
         ToggleGroup toggleGroup = new ToggleGroup();
@@ -89,16 +92,33 @@ public class AdministratorPage {
         hBox.setLayoutX(150);
         hBox.setLayoutY(50);
 
-        BC.setOnAction(actionEvent -> {
-            //  未写 保存数据 弹出保存完成
-        });
-        XYG.setOnAction(actionEvent -> {
+        //提取所有选项框内的数据
+        String XiSuMon=timu.getText();
+        String AnserA=A.getText();
+        String AnserB=B.getText();
+        String AnserC=C.getText();
+        String AnserD=D.getText();
+        RadioButton rightanser = (RadioButton) toggleGroup.getSelectedToggle();
 
-            //  未写 填写下一个题目 刷新界面
-        });
-        QQ.setOnAction(actionEvent -> {
-            //  未写 返回 返回至上一页
+
+        BC.setOnAction(actionEvent -> {
+            //  获得的保存数据 弹出保存完成
+            TopicBackEnd topicBackEnd=new TopicBackEnd(XiSuMon,AnserA,AnserC,AnserD,rightanser);
+            //成功弹出界面
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText("保存完成");
+            alert.showAndWait();
             stage.close();
+            AdministratorPage.cf().show();
+        });
+
+
+
+        QQ.setOnAction(actionEvent -> {
+            // 返回 返回至上一页
+            stage.close();
+            HomePage.first().show();
         });
 
         hBox.getChildren().addAll(label1,vBox1,vBox2,vBox3,vBox4,vBox5,hBox7,vBox6);

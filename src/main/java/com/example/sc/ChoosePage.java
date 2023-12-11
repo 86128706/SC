@@ -21,7 +21,6 @@ import java.util.Iterator;
 public class ChoosePage {
     private static final double STAGE_MIN_WIDTH = 650;  // 舞台最小宽度
     private static final double STAGE_MIN_HEIGHT = 450; // 舞台最小高度
-    static int flag=0;
     static int flag=1;
     static double sum=0;
     public static Stage examination(int number) throws SQLException {
@@ -42,7 +41,7 @@ public class ChoosePage {
         TopicTransfer topicTransfer = new TopicTransfer(iterator.next(),number);
 
         //第一行题目
-        Label label1=new Label(topicTransfer.getSitumon());
+        Label label1=new Label("题目 "+flag+"  "+topicTransfer.getSitumon());
         label1.setMaxWidth(630); // 设置最大宽度
         label1.setWrapText(true);//限制换行
         //第二行四个选项
@@ -57,6 +56,7 @@ public class ChoosePage {
         t4.setToggleGroup(toggleGroup);
         //第三行 登录按钮
         Button button1=new Button("下一题");
+        button1.setStyle("-fx-background-color: #07bafb;-fx-font-size:16;-fx-text-fill: white ");
 
         //判断是否正确，更新界面刷新题目，刷新次数由题量决定
         //ChoseFirst传递过来刷新题目的数量 接受传递数据number
@@ -75,7 +75,7 @@ public class ChoosePage {
                 }
                 try {
                     topicTransfer.find(iterator.next());
-                    label1.setText(topicTransfer.getSitumon());
+                    label1.setText("题目 "+flag+"  "+topicTransfer.getSitumon());
                     t1.setText("A:"+topicTransfer.getOptionsA());
                     t2.setText("B:"+topicTransfer.getOptionsB());
                     t3.setText("C:"+topicTransfer.getOptionsC());
@@ -83,17 +83,20 @@ public class ChoosePage {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-            }else if (flag==number){
-                if (t1.isSelected()){
-                    sum+=topicTransfer.r("A");
-                }else if (t2.isSelected()){
-                    sum+=topicTransfer.r("B");
-                }else if (t3.isSelected()){
-                    sum+=topicTransfer.r("B");
-                }else if (t4.isSelected()){
-                    sum+=topicTransfer.r("D");
-                }
-                flag=999999;
+            }
+            else if (flag==number){
+                //结束界面
+                Lastpage.first().show();
+//                if (t1.isSelected()){
+//                    sum+=topicTransfer.r("A");
+//                }else if (t2.isSelected()){
+//                    sum+=topicTransfer.r("B");
+//                }else if (t3.isSelected()){
+//                    sum+=topicTransfer.r("B");
+//                }else if (t4.isSelected()){
+//                    sum+=topicTransfer.r("D");
+//                }
+//                flag=999999;
             }
 
         });
@@ -101,10 +104,10 @@ public class ChoosePage {
 
         //放入VBOX
         vBox.getChildren().addAll(label1,t1,t2,t3,t4,button1);
-        vBox.setAlignment(Pos.CENTER);
-        vBox.setLayoutX(210);
-        vBox.setLayoutY(100);
-        vBox.setSpacing(20);
+        button1.setAlignment(Pos.CENTER);
+        vBox.setLayoutX(0);
+        vBox.setLayoutY(0);
+        vBox.setSpacing(30);
 
         //背景图片设置
         ImageView view=new ImageView();

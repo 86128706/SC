@@ -1,6 +1,7 @@
 package com.example.sc;
 
 import com.example.service.LoginBackEnd;
+import com.example.service.ManageBackEnd;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -46,14 +47,11 @@ public class HomePage {
 
 
 
-        //登录场景
+        //登录场景，学生端
         button1.setOnAction(actionEvent -> {
             stage.close();
             //获得学号
             String name=textField1.getText();
-
-
-            //判断学号能否登录(未完成)
             //将获得的学号传递到LoginBackEnd
             try {
                 if (LoginBackEnd.login(name)) {
@@ -65,16 +63,35 @@ public class HomePage {
                         alert.setTitle("提示");
                                 alert.setHeaderText("账号不存在");
                                 alert.showAndWait();
+                    HomePage.first().show();
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-            ChooseFirst.cf().show();
         });
 
+        //登录场景，题目添加端
         button2.setOnAction(actionEvent -> {
             stage.close();
-            AdministratorPage.cf().show();
+            //获得密钥
+            String name=textField1.getText();
+            //将获得的学号传递到ManageBackEnd
+            try {
+                if (ManageBackEnd.login(name)) {
+                    //展示成功界面
+                    AdministratorPage.cf().show();
+                } else if (!ManageBackEnd.login(name)) {
+                    //展示登录失败界面
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("提示");
+                    alert.setHeaderText("账号不存在");
+                    alert.showAndWait();
+                    HomePage.first().show();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
         });
 
 
