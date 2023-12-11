@@ -13,10 +13,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
 public class AdministratorPage {
     private static final double STAGE_MIN_WIDTH = 650;  // 舞台最小宽度
     private static final double STAGE_MIN_HEIGHT = 450; // 舞台最小高度
-    public static Stage cf(){
+    public static Stage cf() throws SQLException {
         Stage stage=new Stage();
         VBox hBox=new VBox();
         HBox vBox1=new HBox();
@@ -92,28 +94,48 @@ public class AdministratorPage {
         hBox.setLayoutX(150);
         hBox.setLayoutY(50);
 
-        //提取所有选项框内的数据
-        String XiSuMon=timu.getText();
-        String AnserA=A.getText();
-        String AnserB=B.getText();
-        String AnserC=C.getText();
-        String AnserD=D.getText();
-        RadioButton rightanser = (RadioButton) toggleGroup.getSelectedToggle();
+
+        toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (toggleGroup.getSelectedToggle() != null) {
+                RadioButton selectedRadioButton = (RadioButton) toggleGroup.getSelectedToggle();
+                String r=selectedRadioButton.getText();
 
 
         BC.setOnAction(actionEvent -> {
+            //提取所有选项框内的数据
+            String XiSuMon=timu.getText();
+            String AnserA=A.getText();
+            String AnserB=B.getText();
+            String AnserC=C.getText();
+            String AnserD=D.getText();
+            RadioButton rightanser = (RadioButton) toggleGroup.getSelectedToggle();
+
             //  获得的保存数据 弹出保存完成
-            TopicBackEnd topicBackEnd=new TopicBackEnd(XiSuMon,AnserA,AnserC,AnserD,rightanser);
+
+            try {
+                TopicBackEnd.login(XiSuMon,AnserA,AnserB,AnserC,AnserD,r);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println(XiSuMon+AnserA+AnserB+AnserC+AnserD+r);
+
+
+
             //成功弹出界面
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("提示");
             alert.setHeaderText("保存完成");
             alert.showAndWait();
             stage.close();
-            AdministratorPage.cf().show();
+            try {
+                AdministratorPage.cf().show();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         });
 
-
+            }
+        });
 
         QQ.setOnAction(actionEvent -> {
             // 返回 返回至上一页
